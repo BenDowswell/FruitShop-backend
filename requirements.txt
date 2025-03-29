@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+psycopg2-binary
+python-dotenv
+bcrypt
+python-jose[cryptography]  # for token-based auth (optional but recommended)
+passlib[bcrypt]
+pytest
+httpx
+pytest-asyncio

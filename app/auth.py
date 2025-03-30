@@ -73,3 +73,15 @@ def get_current_user(
             headers={"WWW-Authenticate": "Bearer"},
         )
     return user
+
+
+from fastapi import HTTPException, status
+from .schemas import UserOut
+
+
+def require_role(user: UserOut, role: str):
+    if user.role != role:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail=f"Access forbidden: {role} role required",
+        )

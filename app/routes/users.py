@@ -2,17 +2,20 @@
 
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from .. import schemas, crud
+from .. import schemas, crud, auth
 from ..database import get_db
 
 router = APIRouter(prefix="/users", tags=["Users"])
 
 
 @router.post("/", response_model=schemas.UserOut)
-def register_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
-    existing = crud.get_user_by_username(db, user.username)
-    if existing:
-        raise HTTPException(status_code=400, detail="Username already exists")
+def create_user(
+    user: schemas.UserCreate,
+    db: Session = Depends(get_db),
+    current_user: schemas.UserOut = Depends(auth.get_current_user),
+):
+    # Restrict this route to admins only
+    auth.require_role(current_user, "admin")
     return crud.create_user(db, user)
 
 

@@ -22,4 +22,6 @@ def add_fruit(
     db: Session = Depends(get_db),
     current_user: schemas.UserOut = Depends(auth.get_current_user),
 ):
+    # Restrict this route to admins only
+    auth.require_role(current_user, "admin")
     return crud.create_fruit(db, fruit)

@@ -1,7 +1,7 @@
 ### backend/app/crud.py
 
 from sqlalchemy.orm import Session
-from . import models, schemas
+from . import models, schemas, auth
 from passlib.context import CryptContext
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -13,9 +13,11 @@ def get_user_by_username(db: Session, username: str):
 
 
 def create_user(db: Session, user: schemas.UserCreate):
-    hashed_pw = pwd_context.hash(user.password)
+    hashed_password = auth.hash_password(user.password)
     db_user = models.User(
-        username=user.username, password_hash=hashed_pw, role=user.role
+        username=user.username,
+        password_hash=hashed_password,
+        role=user.role or "customer",  # Default role is "customer"
     )
     db.add(db_user)
     db.commit()

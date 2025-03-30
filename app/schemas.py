@@ -38,6 +38,13 @@ class FruitOut(FruitBase):
     model_config = {"from_attributes": True}
 
 
+class FruitUpdate(BaseModel):
+    name: Optional[str]
+    prefix: Optional[str]
+    price: Optional[float]
+    quantity: Optional[int]
+
+
 class CartItemBase(BaseModel):
     fruit_id: int
     quantity: int

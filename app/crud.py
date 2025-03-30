@@ -56,6 +56,20 @@ def create_fruit(db: Session, fruit: schemas.FruitCreate):
     return db_fruit
 
 
+def update_fruit(db: Session, fruit_id: int, fruit_data: schemas.FruitCreate):
+    """
+    Update the details of a fruit (e.g., price, quantity).
+    """
+    db_fruit = db.query(models.Fruit).filter(models.Fruit.id == fruit_id).first()
+    if not db_fruit:
+        return None
+    for key, value in fruit_data.model_dump().items():
+        setattr(db_fruit, key, value)
+    db.commit()
+    db.refresh(db_fruit)
+    return db_fruit
+
+
 # === Carts ===
 def create_cart(db: Session, user_id: int):
     cart = models.Cart(user_id=user_id)

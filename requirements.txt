@@ -9,3 +9,4 @@ passlib[bcrypt]
 pytest
 httpx
 pytest-asyncio
+python-multipart

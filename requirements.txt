@@ -9,8 +9,4 @@ passlib[bcrypt]
 pytest
 httpx
 pytest-asyncio
-<<<<<<< HEAD
 python-multipart
-=======
-python-multipart
->>>>>>> refs/remotes/origin/master

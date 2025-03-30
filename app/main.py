@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .routes import users, fruits, carts
+from .routes import users, fruits, carts, auth
 
 app = FastAPI()
 
@@ -15,6 +15,8 @@ app.add_middleware(
 app.include_router(users.router)
 app.include_router(fruits.router)
 app.include_router(carts.router)
+app.include_router(auth.router)
+
 
 @app.get("/")
 def read_root():

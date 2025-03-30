@@ -1,6 +1,6 @@
 ### backend/app/schemas.py
 
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel
 from typing import Optional, List
 from datetime import datetime
 
@@ -19,14 +19,6 @@ class UserOut(UserBase):
     role: str
 
     model_config = {"from_attributes": True}
-
-
-class User(BaseModel):
-    username: str
-    role: str
-
-    class Config:
-        orm_mode = True
 
 
 class FruitBase(BaseModel):
@@ -74,15 +66,3 @@ class CartOut(BaseModel):
 class Token(BaseModel):
     access_token: str
     token_type: str
-<<<<<<< HEAD
-=======
-
-
-class TokenData(BaseModel):
-    username: Optional[str] = None
-
-
-class Login(BaseModel):
-    username: str
-    password: str
->>>>>>> refs/remotes/origin/master

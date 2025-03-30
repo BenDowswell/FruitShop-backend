@@ -21,8 +21,6 @@ class UserOut(UserBase):
     model_config = {"from_attributes": True}
 
 
-<<<<<<< HEAD
-=======
 class User(BaseModel):
     username: str
     role: str
@@ -31,7 +29,6 @@ class User(BaseModel):
         orm_mode = True
 
 
->>>>>>> refs/remotes/origin/master
 class FruitBase(BaseModel):
     name: str
     prefix: str

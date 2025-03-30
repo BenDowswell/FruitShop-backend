@@ -16,9 +16,6 @@ def register_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     return crud.create_user(db, user)
 
 
-@router.get("/", response_model=list[schemas.User])
-def list_users(db: Session = Depends(get_db)):
-    """
-    API endpoint to list all users.
-    """
-    return crud.list_all_users(db)
+@router.get("/", response_model=list[schemas.UserOut])
+def get_users(db: Session = Depends(get_db)):
+    return crud.get_all_users(db)
